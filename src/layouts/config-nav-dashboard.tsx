@@ -9,21 +9,26 @@ const icon = (name: string) => (
 
 export const navData = [
   {
-    title: 'Dashboard',
+    title: 'Reports',
     path: '/',
     icon: icon('ic-analytics'),
   },
-  {
-    title: 'User',
-    path: '/user',
-    icon: icon('ic-user'),
-  },
-  {
-    title: 'Product',
-    path: '/products',
-    icon: icon('ic-cart'),
-    info: '+34',
-  },
+  // {
+  //   title: 'Dashboard',
+  //   path: '/',
+  //   icon: icon('ic-analytics'),
+  // },
+  // {
+  //   title: 'User',
+  //   path: '/user',
+  //   icon: icon('ic-user'),
+  // },
+  // {
+  //   title: 'Product',
+  //   path: '/products',
+  //   icon: icon('ic-cart'),
+  //   info: '+34',
+  // },
   // {
   //   title: 'Blog',
   //   path: '/blog',

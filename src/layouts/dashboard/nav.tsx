@@ -14,8 +14,8 @@ import { RouterLink } from 'src/routes/components';
 import { varAlpha } from 'src/theme/styles';
 
 import { Logo } from 'src/components/logo';
-import { Scrollbar } from 'src/components/scrollbar';
 import { Label } from 'src/components/label';
+import { Scrollbar } from 'src/components/scrollbar';
 
 // ----------------------------------------------------------------------
 
