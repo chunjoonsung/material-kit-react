@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { _users } from 'src/_mock';
+import { _reports } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
 
 import { Iconify } from 'src/components/iconify';
@@ -32,7 +32,7 @@ export function ReportView() {
   const [filterName, setFilterName] = useState('');
 
   const dataFiltered: ReportProps[] = applyFilter({
-    inputData: _users,
+    inputData: _reports,
     comparator: getComparator(table.order, table.orderBy),
     filterName,
   });
@@ -43,15 +43,15 @@ export function ReportView() {
     <DashboardContent>
       <Box display="flex" alignItems="center" mb={5}>
         <Typography variant="h4" flexGrow={1}>
-          Users
+          Reports
         </Typography>
-        <Button
+        {/* <Button
           variant="contained"
           color="inherit"
           startIcon={<Iconify icon="mingcute:add-line" />}
         >
           New user
-        </Button>
+        </Button> */}
       </Box>
 
       <Card>
@@ -70,21 +70,24 @@ export function ReportView() {
               <ReportTableHead
                 order={table.order}
                 orderBy={table.orderBy}
-                rowCount={_users.length}
+                rowCount={_reports.length}
                 numSelected={table.selected.length}
                 onSort={table.onSort}
-                onSelectAllRows={(checked) =>
-                  table.onSelectAllRows(
-                    checked,
-                    _users.map((user) => user.id)
-                  )
+                onSelectAllRows={
+                  (checked) => {}
+                  // table.onSelectAllRows(
+                  //   checked,
+                  //   _reports.map((report) => report.id)
+                  // )
                 }
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: 'name', label: '종목명' },
+                  { id: 'price', label: '현재가' },
+                  { id: 'change', label: '등락' },
+                  { id: 'buy', label: '매입가', align: 'center' },
+                  { id: 'amount', label: '수량' },
+                  { id: 'profit', label: '손익' },
+                  { id: 'percent', label: '수익률' },
                   { id: '' },
                 ]}
               />
@@ -105,7 +108,7 @@ export function ReportView() {
 
                 <TableEmptyRows
                   height={68}
-                  emptyRows={emptyRows(table.page, table.rowsPerPage, _users.length)}
+                  emptyRows={emptyRows(table.page, table.rowsPerPage, _reports.length)}
                 />
 
                 {notFound && <TableNoData searchQuery={filterName} />}
@@ -117,7 +120,7 @@ export function ReportView() {
         <TablePagination
           component="div"
           page={table.page}
-          count={_users.length}
+          count={_reports.length}
           rowsPerPage={table.rowsPerPage}
           onPageChange={table.onChangePage}
           rowsPerPageOptions={[5, 10, 25]}
