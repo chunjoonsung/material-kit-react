@@ -9,30 +9,30 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { _users } from 'src/_mock';
+import { _reports } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
 
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 
 import { TableNoData } from '../table-no-data';
-import { UserTableRow } from '../user-table-row';
-import { UserTableHead } from '../user-table-head';
+import { ReportTableRow } from '../report-table-row';
+import { ReportTableHead } from '../report-table-head';
 import { TableEmptyRows } from '../table-empty-rows';
-import { UserTableToolbar } from '../user-table-toolbar';
+import { ReportTableToolbar } from '../report-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 
-import type { UserProps } from '../user-table-row';
+import type { ReportProps } from '../report-table-row';
 
 // ----------------------------------------------------------------------
 
-export function UserView() {
+export function ReportView() {
   const table = useTable();
 
   const [filterName, setFilterName] = useState('');
 
-  const dataFiltered: UserProps[] = applyFilter({
-    inputData: _users,
+  const dataFiltered: ReportProps[] = applyFilter({
+    inputData: _reports,
     comparator: getComparator(table.order, table.orderBy),
     filterName,
   });
@@ -43,19 +43,19 @@ export function UserView() {
     <DashboardContent>
       <Box display="flex" alignItems="center" mb={5}>
         <Typography variant="h4" flexGrow={1}>
-          Users
+          Reports
         </Typography>
-        <Button
+        {/* <Button
           variant="contained"
           color="inherit"
           startIcon={<Iconify icon="mingcute:add-line" />}
         >
           New user
-        </Button>
+        </Button> */}
       </Box>
 
       <Card>
-        <UserTableToolbar
+        <ReportTableToolbar
           numSelected={table.selected.length}
           filterName={filterName}
           onFilterName={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,24 +67,27 @@ export function UserView() {
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
             <Table sx={{ minWidth: 800 }}>
-              <UserTableHead
+              <ReportTableHead
                 order={table.order}
                 orderBy={table.orderBy}
-                rowCount={_users.length}
+                rowCount={_reports.length}
                 numSelected={table.selected.length}
                 onSort={table.onSort}
-                onSelectAllRows={(checked) =>
-                  table.onSelectAllRows(
-                    checked,
-                    _users.map((user) => user.id)
-                  )
+                onSelectAllRows={
+                  (checked) => {}
+                  // table.onSelectAllRows(
+                  //   checked,
+                  //   _reports.map((report) => report.id)
+                  // )
                 }
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: 'name', label: '종목명' },
+                  { id: 'price', label: '현재가' },
+                  { id: 'change', label: '등락' },
+                  { id: 'buy', label: '매입가', align: 'center' },
+                  { id: 'amount', label: '수량' },
+                  { id: 'profit', label: '손익' },
+                  { id: 'percent', label: '수익률' },
                   { id: '' },
                 ]}
               />
@@ -95,7 +98,7 @@ export function UserView() {
                     table.page * table.rowsPerPage + table.rowsPerPage
                   )
                   .map((row) => (
-                    <UserTableRow
+                    <ReportTableRow
                       key={row.id}
                       row={row}
                       selected={table.selected.includes(row.id)}
@@ -105,7 +108,7 @@ export function UserView() {
 
                 <TableEmptyRows
                   height={68}
-                  emptyRows={emptyRows(table.page, table.rowsPerPage, _users.length)}
+                  emptyRows={emptyRows(table.page, table.rowsPerPage, _reports.length)}
                 />
 
                 {notFound && <TableNoData searchQuery={filterName} />}
@@ -117,7 +120,7 @@ export function UserView() {
         <TablePagination
           component="div"
           page={table.page}
-          count={_users.length}
+          count={_reports.length}
           rowsPerPage={table.rowsPerPage}
           onPageChange={table.onChangePage}
           rowsPerPageOptions={[5, 10, 25]}

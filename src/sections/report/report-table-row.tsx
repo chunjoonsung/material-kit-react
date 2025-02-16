@@ -15,23 +15,24 @@ import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export type UserProps = {
+export type ReportProps = {
   id: string;
   name: string;
-  role: string;
-  status: string;
-  company: string;
-  avatarUrl: string;
-  isVerified: boolean;
+  price: number;
+  change: number;
+  buy: number;
+  amount: number;
+  profit: number;
+  percent: number;
 };
 
-type UserTableRowProps = {
-  row: UserProps;
+type ReportTableRowProps = {
+  row: ReportProps;
   selected: boolean;
   onSelectRow: () => void;
 };
 
-export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) {
+export function ReportTableRow({ row, selected, onSelectRow }: ReportTableRowProps) {
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null);
 
   const handleOpenPopover = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,38 +46,24 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
   return (
     <>
       <TableRow hover tabIndex={-1} role="checkbox" selected={selected}>
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           <Checkbox disableRipple checked={selected} onChange={onSelectRow} />
-        </TableCell>
+        </TableCell> */}
 
-        <TableCell component="th" scope="row">
+        {/* <TableCell component="th" scope="row">
           <Box gap={2} display="flex" alignItems="center">
-            <Avatar alt={row.name} src={row.avatarUrl} />
+            <Avatar alt={row.name} src={row.name} />
             {row.name}
           </Box>
-        </TableCell>
+        </TableCell> */}
 
-        <TableCell>{row.company}</TableCell>
-
-        <TableCell>{row.role}</TableCell>
-
-        <TableCell align="center">
-          {row.isVerified ? (
-            <Iconify width={22} icon="solar:check-circle-bold" sx={{ color: 'success.main' }} />
-          ) : (
-            '-'
-          )}
-        </TableCell>
-
-        <TableCell>
-          <Label color={(row.status === 'banned' && 'error') || 'success'}>{row.status}</Label>
-        </TableCell>
-
-        <TableCell align="right">
-          <IconButton onClick={handleOpenPopover}>
-            <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
-        </TableCell>
+        <TableCell>{row.name}</TableCell>
+        <TableCell>{row.price}</TableCell>
+        <TableCell>{row.change}</TableCell>
+        <TableCell>{row.buy}</TableCell>
+        <TableCell>{row.amount}</TableCell>
+        <TableCell>{row.profit}</TableCell>
+        <TableCell>{row.percent}</TableCell>
       </TableRow>
 
       <Popover
