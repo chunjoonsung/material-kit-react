@@ -15,6 +15,7 @@ import { varAlpha } from 'src/theme/styles';
 
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
+import { Label } from 'src/components/label';
 
 // ----------------------------------------------------------------------
 
@@ -142,12 +143,14 @@ export function NavContent({ data, sx }: NavContentProps) {
                     <Box component="span" sx={{ width: 24, height: 24 }}>
                       {item.icon}
                     </Box>
-
                     <Box component="span" flexGrow={1}>
                       {item.title}
                     </Box>
-
-                    {item.info && item.info}
+                    {item.info && (
+                      <Label color="error" variant="inverted">
+                        {item.info}
+                      </Label>
+                    )}
                   </ListItemButton>
                 </ListItem>
               );
